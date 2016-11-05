@@ -1,6 +1,7 @@
 package com.cw14.dbz_punching_machine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -126,8 +127,15 @@ public class PunchActivity extends AppCompatActivity  {
             }
         }.start();
 
-
+        showGraphFadeIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     protected void onResume() {
         super.onResume();
