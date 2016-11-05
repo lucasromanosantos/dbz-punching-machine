@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="countdown">
+        <item name="android:textColor">#FF0000</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">50sp</item>
+    </style>
+
 </resources>

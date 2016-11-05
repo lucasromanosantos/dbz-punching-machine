@@ -14,7 +14,8 @@
         android:paddingTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:id="@+id/tableValues">
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
@@ -53,5 +54,22 @@
                 android:gravity="center"/>
         </TableRow>
     </TableLayout>
-    
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/countdown"
+        android:gravity="center"
+        android:layout_below="@+id/tableValues"
+        style="@style/countdown" />
+
+    <Button
+        android:id="@+id/showGraphFadeBt"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:alpha="0"
+        android:layout_below="@+id/countdown"
+        android:text="Exibir grafico" />
+
+
 </RelativeLayout>
