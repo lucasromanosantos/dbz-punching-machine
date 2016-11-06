@@ -1,17 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/backgroundColor</item>
     </style>
 
     <style name="countdown">
         <item name="android:textColor">#FF0000</item>
         <item name="android:typeface">monospace</item>
-        <item name="android:textSize">50sp</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:layout_margin">5sp</item>
+    </style>
+
+    <style name="punchBt">
+        <item name="android:background">@color/green</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+    
+    <style name="repeatPanel">
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

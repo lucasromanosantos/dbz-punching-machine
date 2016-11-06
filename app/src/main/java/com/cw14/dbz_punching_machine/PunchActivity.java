@@ -1,5 +1,6 @@
 package com.cw14.dbz_punching_machine;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,9 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,11 +38,15 @@ public class PunchActivity extends AppCompatActivity  {
     private Boolean mInitialized = false;
     private float mLastX, mLastY, mLastZ;
 
-    Button showGraphFadeIn;
+    TableLayout afterPunchPanel;
+    Button repetirBt;
+    Button exibirGraficoBt;
+    Button voltarBt;
 
     List<Double> results = new ArrayList<Double>();
     Double resultado;
 
+    TextView countdown;
     // Get norm given a vector.
     protected double getNorm(float x, float y, float z) {
         double sum = x*x + y*y + z*z;
@@ -51,12 +59,17 @@ public class PunchActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punch);
 
+        countdown = (TextView) findViewById(R.id.countdown);
+
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(myAccelerometerListener, mAccelerometer,
                 SensorManager.SENSOR_DELAY_NORMAL);
 
-        showGraphFadeIn = (Button) findViewById(R.id.showGraphFadeBt);
+        afterPunchPanel = (TableLayout) findViewById(R.id.afterPunchPanel);
+        repetirBt = (Button) findViewById(R.id.repetirBt);
+        exibirGraficoBt = (Button) findViewById(R.id.showGraphFadeBt);
+        voltarBt = (Button) findViewById(R.id.voltarBt);
 
         myAccelerometerListener = new SensorEventListener() {
             @Override
@@ -100,42 +113,91 @@ public class PunchActivity extends AppCompatActivity  {
             }
         };
 
-        new CountDownTimer(4000, 1000) {
-            TextView countdown = (TextView) findViewById(R.id.countdown);
-            public void onTick(long millisUntilFinished) {
-                countdown.setText("" + millisUntilFinished / 1000);
-            }
+        startFirstCountDown();
 
-            public void onFinish() {
-                countdown.setText("Fim!");
-                resultado = Collections.max(results);
-                countdown.setText("" + resultado);
-                mSensorManager.unregisterListener(myAccelerometerListener);
-
-                //show grafico fade in
-                Animation fadeIn = new AlphaAnimation(0, 1);
-                fadeIn.setInterpolator(new AccelerateInterpolator()); //add this
-                fadeIn.setDuration(1000);
-                fadeIn.start();
-
-                showGraphFadeIn = (Button) findViewById(R.id.showGraphFadeBt);
-
-                AnimationSet animation = new AnimationSet(false);
-                animation.addAnimation(fadeIn);
-                showGraphFadeIn.setAnimation(animation);
-                showGraphFadeIn.setAlpha(1);
-            }
-        }.start();
-
-        showGraphFadeIn.setOnClickListener(new View.OnClickListener() {
+        exibirGraficoBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
                 startActivity(intent);
             }
         });
+
+        repetirBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resultado = 0d;
+                mSensorManager.registerListener(myAccelerometerListener, mAccelerometer,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+                startFirstCountDown();
+                afterPunchPanelFadeOut();
+
+            }
+        });
+
+        voltarBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishActivity(1);
+            }
+        });
+
     }
 
+    private void startFirstCountDown() {
+        new CountDownTimer(4000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                countdown.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                countdown.setText("Soque!");
+                resultado = Collections.max(results);
+                //countdown.setText("" + resultado);
+                startCountAnimation();
+                mSensorManager.unregisterListener(myAccelerometerListener);
+
+                afterPunchPanelFadeIn();
+            }
+        }.start();
+
+    }
+
+    private void afterPunchPanelFadeIn() {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new AccelerateInterpolator()); //add this
+        fadeIn.setDuration(1000);
+        fadeIn.start();
+
+        AnimationSet animation = new AnimationSet(false);
+        animation.addAnimation(fadeIn);
+        afterPunchPanel.setAnimation(animation);
+        afterPunchPanel.setAlpha(1);
+    }
+
+    private void afterPunchPanelFadeOut() {
+        Animation fadeIn = new AlphaAnimation(1, 0);
+        fadeIn.setInterpolator(new AccelerateInterpolator()); //add this
+        fadeIn.setDuration(500);
+        fadeIn.start();
+
+        AnimationSet animation = new AnimationSet(false);
+        animation.addAnimation(fadeIn);
+        afterPunchPanel.setAnimation(animation);
+        afterPunchPanel.setAlpha(0);
+    }
+
+    private void startCountAnimation() {
+        ValueAnimator animator = new ValueAnimator();
+        animator.setObjectValues(0, resultado.intValue());
+        animator.setDuration(1000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                countdown.setText("" + (int) animation.getAnimatedValue());
+            }
+        });
+        animator.start();
+    }
 
     protected void onResume() {
         super.onResume();

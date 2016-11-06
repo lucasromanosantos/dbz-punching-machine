@@ -63,13 +63,35 @@
         android:layout_below="@+id/tableValues"
         style="@style/countdown" />
 
-    <Button
-        android:id="@+id/showGraphFadeBt"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:alpha="0"
-        android:layout_below="@+id/countdown"
-        android:text="Exibir grafico" />
+        android:id="@+id/afterPunchPanel"
+        android:layout_below="@id/countdown"
+        android:gravity="center_horizontal"
+        style="@style/repeatPanel">
+        <TableRow>
+            <Button
+                android:layout_span="2"
+                android:id="@+id/repetirBt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Repetir" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/showGraphFadeBt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Voltar"
+                android:layout_below="@id/repetirBt"/>
+            <Button
+                android:id="@+id/voltarBt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Exibir grafico"/>
 
-
+        </TableRow>
+    </TableLayout>
 </RelativeLayout>
