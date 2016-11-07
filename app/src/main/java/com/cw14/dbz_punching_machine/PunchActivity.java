@@ -143,7 +143,7 @@ public class PunchActivity extends AppCompatActivity  {
         voltarBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finishActivity(1);
+                finish();
             }
         });
 

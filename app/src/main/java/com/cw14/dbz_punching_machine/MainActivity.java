@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                instructionsButton.setBackgroundColor(Color.parseColor("#8D2C8D"));
+                Intent intent = new Intent(MainActivity.this, InstructionsActivity.class);
+                startActivity(intent);
             }
         });
         exitButton.setOnClickListener(new View.OnClickListener() {
