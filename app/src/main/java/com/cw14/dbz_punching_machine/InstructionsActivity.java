@@ -16,8 +16,10 @@ public class InstructionsActivity extends AppCompatActivity {
     Button voltarBt;
     ListView lvInstructions;
     String[] instructions = {
-            "Regra numero UNO: ",
-            "Regra numero dois"
+            "1. Clique em PUNCH!: ",
+            "2. Use toda sua força e soque o ar",
+            "3. Impressione seus amigos e o Majinboo",
+            "4. Descubra quem é o mais forte do grupo"
     };
 
     @Override

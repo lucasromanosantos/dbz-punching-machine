@@ -124,6 +124,10 @@ public class PunchActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
+                float[] array = new float[results.size()];
+                for(int i = 0; i < results.size(); i++)
+                    array[i] = (float) results.get(i);
+                intent.putExtra("ptsY", array);
                 startActivity(intent);
             }
         });

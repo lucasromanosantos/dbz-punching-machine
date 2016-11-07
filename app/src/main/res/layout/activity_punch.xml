@@ -117,13 +117,13 @@
                 android:id="@+id/showGraphFadeBt"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Voltar"
+                android:text="Exibir grafico"
                 android:layout_below="@id/repetirBt"/>
             <Button
                 android:id="@+id/voltarBt"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Exibir grafico"/>
+                android:text="Voltar"/>
 
         </TableRow>
     </TableLayout>

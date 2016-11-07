@@ -19,7 +19,8 @@
         android:layout_alignParentTop="true"
 
         android:layout_marginTop="20dp"
-        android:id="@+id/instructionsText" />
+        android:id="@+id/instructionsText"
+        style="@style/titleOfActivity" />
 
     <ListView
         android:id="@+id/lvInstructions"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/instructionsText"/>
+        android:layout_below="@id/instructionsText"
+        style="@style/listInstructions" />
 
     <Button
         android:text="@string/voltar"
