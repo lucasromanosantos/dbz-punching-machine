@@ -17,9 +17,10 @@
     </style>
 
     <style name="punchBt">
-        <item name="android:background">@color/green</item>
+        <item name="android:background">#FF0000</item>
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:padding">5sp</item>
     </style>
     
     <style name="repeatPanel">

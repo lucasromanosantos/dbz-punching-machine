@@ -4,10 +4,6 @@
     android:id="@+id/activity_punch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cw14.dbz_punching_machine.PunchActivity">
 
     <TableLayout
@@ -60,8 +56,15 @@
         android:layout_height="100dp"
         android:id="@+id/countdown"
         android:gravity="center"
-        android:layout_below="@+id/tableValues"
+        android:layout_centerVertical="true"
         style="@style/countdown" />
+
+    <ImageView
+        android:id="@+id/goku1"
+        android:layout_width="330px"
+        android:layout_height="449px"
+        android:src="@drawable/majinboo"
+        android:layout_alignRight="@id/countdown"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -70,6 +73,7 @@
         android:id="@+id/afterPunchPanel"
         android:layout_below="@id/countdown"
         android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
         style="@style/repeatPanel">
         <TableRow>
             <Button

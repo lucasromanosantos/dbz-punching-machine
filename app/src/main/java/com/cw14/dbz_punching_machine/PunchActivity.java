@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,9 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -42,6 +45,7 @@ public class PunchActivity extends AppCompatActivity  {
     Button repetirBt;
     Button exibirGraficoBt;
     Button voltarBt;
+    ImageView goku;
 
     List<Double> results = new ArrayList<Double>();
     Double resultado;
@@ -70,6 +74,7 @@ public class PunchActivity extends AppCompatActivity  {
         repetirBt = (Button) findViewById(R.id.repetirBt);
         exibirGraficoBt = (Button) findViewById(R.id.showGraphFadeBt);
         voltarBt = (Button) findViewById(R.id.voltarBt);
+        goku = (ImageView) findViewById(R.id.goku1);
 
         myAccelerometerListener = new SensorEventListener() {
             @Override
@@ -173,6 +178,10 @@ public class PunchActivity extends AppCompatActivity  {
         animation.addAnimation(fadeIn);
         afterPunchPanel.setAnimation(animation);
         afterPunchPanel.setAlpha(1);
+
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        goku.startAnimation(fadeInAnimation);
+
     }
 
     private void afterPunchPanelFadeOut() {
