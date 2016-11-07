@@ -57,23 +57,52 @@
         android:id="@+id/countdown"
         android:gravity="center"
         android:layout_centerVertical="true"
+        android:text="0"
         style="@style/countdown" />
 
     <ImageView
-        android:id="@+id/goku1"
+        android:id="@+id/majinboo"
         android:layout_width="330px"
         android:layout_height="449px"
         android:src="@drawable/majinboo"
-        android:layout_alignRight="@id/countdown"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/transparent"/>
+
+    <ImageView
+        android:id="@+id/chatBubble"
+        android:layout_width="430px"
+        android:layout_height="300px"
+        android:src="@drawable/chat_bubble"
+        android:layout_alignTop="@id/majinboo"
+        android:layout_marginLeft="250px"
+        android:layout_marginTop="-300px"
+        android:background="@android:color/transparent"
+        />
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/chatBubble"
+        android:layout_alignTop="@id/chatBubble"
+        android:layout_alignRight="@id/chatBubble"
+        android:layout_alignBottom="@id/chatBubble"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="vc eh lixo"
+        android:textColor="#000000"
+        android:background="@android:color/transparent"
+        />
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0"
+        android:alpha="1"
         android:id="@+id/afterPunchPanel"
-        android:layout_below="@id/countdown"
-        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         style="@style/repeatPanel">
         <TableRow>
             <Button
@@ -98,4 +127,5 @@
 
         </TableRow>
     </TableLayout>
+
 </RelativeLayout>

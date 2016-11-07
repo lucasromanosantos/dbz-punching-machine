@@ -74,7 +74,7 @@ public class PunchActivity extends AppCompatActivity  {
         repetirBt = (Button) findViewById(R.id.repetirBt);
         exibirGraficoBt = (Button) findViewById(R.id.showGraphFadeBt);
         voltarBt = (Button) findViewById(R.id.voltarBt);
-        goku = (ImageView) findViewById(R.id.goku1);
+        goku = (ImageView) findViewById(R.id.majinboo);
 
         myAccelerometerListener = new SensorEventListener() {
             @Override

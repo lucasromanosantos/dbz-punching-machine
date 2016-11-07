@@ -25,7 +25,7 @@
     
     <style name="repeatPanel">
         <item name="android:padding">10dp</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>
