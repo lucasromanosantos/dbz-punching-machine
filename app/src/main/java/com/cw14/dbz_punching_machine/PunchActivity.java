@@ -49,6 +49,7 @@ public class PunchActivity extends AppCompatActivity  {
 
     List<Double> results = new ArrayList<Double>();
     Double resultado;
+    Boolean fim;
 
     TextView countdown;
     // Get norm given a vector.
@@ -63,6 +64,7 @@ public class PunchActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punch);
 
+        fim = false;
         countdown = (TextView) findViewById(R.id.countdown);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -118,19 +120,22 @@ public class PunchActivity extends AppCompatActivity  {
             }
         };
 
+        fim = false;
         startFirstCountDown();
 
         exibirGraficoBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
-                float[] array = new float[results.size()];
-                for(int i = 0; i < results.size(); i++)
-                    array[i] = results.get(i).floatValue();
-                Bundle b = new Bundle();
-                b.putFloatArray("ptsY", array);
-                intent.putExtras(b);
-                startActivity(intent);
+                if(fim) {
+                    Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
+                    float[] array = new float[results.size()];
+                    for (int i = 0; i < results.size(); i++)
+                        array[i] = results.get(i).floatValue();
+                    Bundle b = new Bundle();
+                    b.putFloatArray("ptsY", array);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -162,6 +167,7 @@ public class PunchActivity extends AppCompatActivity  {
             }
 
             public void onFinish() {
+                fim = true;
                 countdown.setText("Soque!");
                 resultado = Collections.max(results);
                 //countdown.setText("" + resultado);

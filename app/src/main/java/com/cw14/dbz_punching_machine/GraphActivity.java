@@ -19,15 +19,14 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-
         Bundle extras = getIntent().getExtras();
+        graphView = (GraphView) findViewById(R.id.graphView);
+        voltarBt = (Button) findViewById(R.id.voltarBt);
+
         if (extras != null) {
             float[] results = extras.getFloatArray("ptsY");
             if (results != null) graphView.setPtsY(results);
         }
-
-        graphView = (GraphView) findViewById(R.id.graphView);
-        voltarBt = (Button) findViewById(R.id.voltarBt);
 
         voltarBt.setOnClickListener(new View.OnClickListener() {
             @Override

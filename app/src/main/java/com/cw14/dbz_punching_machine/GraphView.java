@@ -25,13 +25,9 @@ public class GraphView extends View {
         super(context, attributeSet);
         initGraphView();
     }
-    float[] ptsY = new float[10000];
-
-    public void setPtsY(float[] data) {
-        ptsY = data;
-    }
 
     Paint paintAxis;
+    float[] ptsY;
 
     public void initGraphView() {
         Resources r = this.getResources();
@@ -59,23 +55,24 @@ public class GraphView extends View {
         // y
         canvas.drawLine(marginLeft, marginTop, marginLeft, measuredHeight-marginBottom, paintAxis);
 
-
-        //ptsY = extras.getFloatArray("ptsY");
-
-
         float freq = (measuredWidth - marginLeft - marginRight) / ptsY.length;
+        float[] pts = new float[2* ptsY.length + 1];
+        int i, j;
 
-        float[] pts = new float[ptsY.length];
-        int i;
-
-        for(i=0; i<ptsY.length; i++) {
-            pts[2*i] = i*freq;
-            pts[2*i+1] = ptsY[i];
+        for(i=0, j=0; i < ptsY.length; i++, j+=2) {
+            pts[j] = i * freq;
+            pts[j + 1] = ptsY[i];
         }
-
         canvas.drawLines(pts, paintAxis);
 
     }
 
+    public float[] getPtsY() {
+        return ptsY;
+    }
+
+    public void setPtsY(float[] ptsY) {
+        this.ptsY = ptsY;
+    }
 
 }
