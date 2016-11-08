@@ -126,8 +126,10 @@ public class PunchActivity extends AppCompatActivity  {
                 Intent intent = new Intent(PunchActivity.this, GraphActivity.class);
                 float[] array = new float[results.size()];
                 for(int i = 0; i < results.size(); i++)
-                    array[i] = (float) results.get(i);
-                intent.putExtra("ptsY", array);
+                    array[i] = results.get(i).floatValue();
+                Bundle b = new Bundle();
+                b.putFloatArray("ptsY", array);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });

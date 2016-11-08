@@ -25,6 +25,11 @@ public class GraphView extends View {
         super(context, attributeSet);
         initGraphView();
     }
+    float[] ptsY = new float[10000];
+
+    public void setPtsY(float[] data) {
+        ptsY = data;
+    }
 
     Paint paintAxis;
 
@@ -54,14 +59,13 @@ public class GraphView extends View {
         // y
         canvas.drawLine(marginLeft, marginTop, marginLeft, measuredHeight-marginBottom, paintAxis);
 
-        float[] ptsY;
-        Bundle extras = Intent.getIntent().getExtras();
-        ptsY = extras.getFloatArray("ptsY");
+
+        //ptsY = extras.getFloatArray("ptsY");
 
 
-        double freq = (measuredWidth - marginLeft - marginRight) / ptsY.length;
+        float freq = (measuredWidth - marginLeft - marginRight) / ptsY.length;
 
-        double[] pts = new double[ptsY.length];
+        float[] pts = new float[ptsY.length];
         int i;
 
         for(i=0; i<ptsY.length; i++) {
@@ -71,21 +75,6 @@ public class GraphView extends View {
 
         canvas.drawLines(pts, paintAxis);
 
-        /*canvas.drawPaint(paint);
-        Path path = new Path();
-        for(int i = 0; i < 50; ++i) {
-            path.moveTo(4, i);
-            path.lineTo(4, i);
-        }
-
-        path.close();
-
-        paint.setStrokeWidth(3);
-        paint.setPathEffect(null);
-        paint.setColor(Color.WHITE);
-        paint.setStyle(Paint.Style.STROKE);
-
-        canvas.drawPath(path, paint); */
     }
 
 
