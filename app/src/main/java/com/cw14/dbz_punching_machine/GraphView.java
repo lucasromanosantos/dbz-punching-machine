@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.Arrays;
+
 /**
  * Created by lucas on 11/5/16.
  */
@@ -55,18 +57,12 @@ public class GraphView extends View {
         // Valor do Array - f
         // Max - yAxisSize
         // --- f = (ValorDoArray * yAxisSize) / Max
-        // Tendo o valor que quero desenhar, tenho que ajustar no grafico.
-        // O valor vai ser:
-        // measuredHeight - marginBottom - newValue
         float newValue = (value * yAxisSize) / max;
-        return measuredHeight - marginBottom - newValue;
+        return newValue;
     }
 
-    float[] scaleVector(float[] array, int max, int yAxisSize, int measuredHeight, int marginBottom) {
-        // Nota para o i += 2: soh quero fazer para valores de x.
-        for(int i=0; i<array.length; i += 2) {
-            if(i > array.length)
-                return array;
+    float[] scaleVector(float[] array, float max, int yAxisSize, int measuredHeight, int marginBottom) {
+        for(int i=0; i<array.length; i++) {
             array[i] = scale(array[i], max, yAxisSize, measuredHeight, marginBottom);
         }
         return array;
@@ -88,6 +84,8 @@ public class GraphView extends View {
         int yAxisSize = measuredHeight - marginTop - marginBottom;
         int scaleLineSize = 15;
 
+        float max = 0;
+
         // Draw x axis
         canvas.drawLine(marginLeft, measuredHeight-marginBottom, measuredWidth-marginRight, measuredHeight-marginBottom, paintAxis);
         // Draw y axis
@@ -107,7 +105,6 @@ public class GraphView extends View {
             // We still need to draw the number (what is the number?)
         }
 
-        float max = 0;
         for(i=0; i<ptsY.length; i++) {
             if(ptsY[i] > max) {
                 max = ptsY[i];
@@ -116,19 +113,21 @@ public class GraphView extends View {
 
         float scaleMax = getNextHundred(max);
 
+        ptsY = scaleVector(ptsY, max, yAxisSize, measuredHeight, marginBottom);
+
         float freq = (measuredWidth - marginLeft - marginRight) / ptsY.length;
-        float[] pts = new float[2* ptsY.length + 1];
+        float[] pts;
+        pts = new float[2 * ptsY.length + 1];
 
         for(i=0, j=0; i < ptsY.length; i++, j+=2) {
-            pts[j] = i * freq;
-            pts[j + 1] = ptsY[i];
+            pts[j] = i * freq + marginLeft;
+            pts[j+1] = ptsY[i];
         }
 
-        pts = scaleVector(pts, max, yAxisSize, measuredHeight, marginBottom);
-
-        canvas.drawLines(pts, paintAxis);
-        // Provavelmente tem que chamar mais isso aqui.
-        //canvas.drawLines(pts, 2, pts.length-2, paintAxis);
+        for(i=0; i+3<pts.length; i += 2) {
+            canvas.drawLine(pts[i+0], measuredHeight - pts[i+1] - marginBottom,
+                            pts[i+2], measuredHeight - pts[i+3] - marginBottom, paintAxis);
+        }
     }
 
     public float[] getPtsY() {
