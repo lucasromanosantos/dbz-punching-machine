@@ -10,6 +10,8 @@ import android.graphics.Path;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -18,20 +20,21 @@ import java.util.Arrays;
  */
 
 public class GraphView extends View {
-
-    public GraphView(Context context) {
-        super(context);
-        initGraphView();
-    }
-    public GraphView(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        initGraphView();
-    }
+    Context graphContext;
 
     Paint paintAxis;
     float[] ptsY;
 
-    public void initGraphView() {
+    public GraphView(Context context) {
+        super(context);
+        initGraphView(context);
+    }
+    public GraphView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        initGraphView(context);
+    }
+
+    public void initGraphView(Context context) {
         Resources r = this.getResources();
 
         paintAxis = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -40,6 +43,18 @@ public class GraphView extends View {
         paintAxis.setStyle(Paint.Style.FILL_AND_STROKE);
 
         this.invalidate();
+/*
+        LinearLayout layout = (LinearLayout) findViewById(R.id.graphLayout);
+
+        TextView valueTV = new TextView(context);
+        valueTV.setText("hallo hallo");
+        valueTV.setId(5);
+        valueTV.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        layout.addView(valueTV);
+    */
     }
 
     float getNextHundred(float n) {
@@ -73,10 +88,10 @@ public class GraphView extends View {
         // centro e raio
         int measuredWidth = getMeasuredWidth();
         int measuredHeight = getMeasuredHeight();
-        int marginBottom = 70;
+        int marginTop = 70;
         int marginLeft = 70;
         int marginRight = 70;
-        int marginTop = 70;
+        int marginBottom = 70;
 
         int i, j;
         int x, y;
@@ -91,7 +106,6 @@ public class GraphView extends View {
         // Draw y axis
         canvas.drawLine(marginLeft, marginTop, marginLeft, measuredHeight-marginBottom, paintAxis);
 
-        // THIS 2 FORS ARE NOT TESTED YET!!
         // Draw scale on x axis
         for(i=1; i<5; i++) {
             x = marginLeft + (i * xAxisSize / 4);
