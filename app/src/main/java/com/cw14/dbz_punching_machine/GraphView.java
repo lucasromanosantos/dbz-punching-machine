@@ -43,18 +43,6 @@ public class GraphView extends View {
         paintAxis.setStyle(Paint.Style.FILL_AND_STROKE);
 
         this.invalidate();
-/*
-        LinearLayout layout = (LinearLayout) findViewById(R.id.graphLayout);
-
-        TextView valueTV = new TextView(context);
-        valueTV.setText("hallo hallo");
-        valueTV.setId(5);
-        valueTV.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-
-        layout.addView(valueTV);
-    */
     }
 
     float getNextHundred(float n) {
@@ -76,30 +64,27 @@ public class GraphView extends View {
         return newValue;
     }
 
-    float[] scaleVector(float[] array, float max, int yAxisSize, int measuredHeight, int marginBottom) {
+    void scaleVector(float[] array, float max, int yAxisSize, int measuredHeight, int marginBottom) {
         for(int i=0; i<array.length; i++) {
             array[i] = scale(array[i], max, yAxisSize, measuredHeight, marginBottom);
         }
-        return array;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         // centro e raio
-        int measuredWidth = getMeasuredWidth();
-        int measuredHeight = getMeasuredHeight();
-        int marginTop = 70;
-        int marginLeft = 70;
-        int marginRight = 70;
-        int marginBottom = 70;
-
         int i, j;
         int x, y;
+        float max = 0;
+        int marginTop = 70;
+        int marginLeft = 90;
+        int marginRight = 70;
+        int marginBottom = 70;
+        int scaleLineSize = 15;
+        int measuredWidth = getMeasuredWidth();
+        int measuredHeight = getMeasuredHeight();
         int xAxisSize = measuredWidth - marginLeft - marginRight;
         int yAxisSize = measuredHeight - marginTop - marginBottom;
-        int scaleLineSize = 15;
-
-        float max = 0;
 
         // Draw x axis
         canvas.drawLine(marginLeft, measuredHeight-marginBottom, measuredWidth-marginRight, measuredHeight-marginBottom, paintAxis);
@@ -107,8 +92,8 @@ public class GraphView extends View {
         canvas.drawLine(marginLeft, marginTop, marginLeft, measuredHeight-marginBottom, paintAxis);
 
         // Draw scale on x axis
-        for(i=1; i<5; i++) {
-            x = marginLeft + (i * xAxisSize / 4);
+        for(i=1; i<4; i++) {
+            x = marginLeft + (i * xAxisSize / 3);
             canvas.drawLine(x, measuredHeight - marginBottom, x, measuredHeight - marginBottom + scaleLineSize, paintAxis);
             // We still need to draw the number (exactly i, position (x,y) should be something like: x-20, measuredHeight-marginBottom)
         }
@@ -126,16 +111,22 @@ public class GraphView extends View {
         }
 
         float scaleMax = getNextHundred(max);
+        float[] scaledPtsY = new float[ptsY.length];
 
-        ptsY = scaleVector(ptsY, max, yAxisSize, measuredHeight, marginBottom);
+        // Copy ptsY to scaledPtsY
+        for(i=0; i< ptsY.length; i++) {
+            scaledPtsY[i] = ptsY[i];
+        }
+
+        scaleVector(scaledPtsY, scaleMax, yAxisSize, measuredHeight, marginBottom);
 
         float freq = (measuredWidth - marginLeft - marginRight) / ptsY.length;
         float[] pts;
-        pts = new float[2 * ptsY.length + 1];
+        pts = new float[2 * scaledPtsY.length + 1];
 
-        for(i=0, j=0; i < ptsY.length; i++, j+=2) {
+        for(i=0, j=0; i < scaledPtsY.length; i++, j+=2) {
             pts[j] = i * freq + marginLeft;
-            pts[j+1] = ptsY[i];
+            pts[j+1] = scaledPtsY[i];
         }
 
         for(i=0; i+3<pts.length; i += 2) {
