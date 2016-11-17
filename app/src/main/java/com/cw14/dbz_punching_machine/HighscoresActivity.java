@@ -37,12 +37,6 @@ public class HighscoresActivity extends AppCompatActivity {
         highscoresAdapter = new ArrayAdapter<String>(this, R.layout.highscore_text_view, R.id.roxTextView, highscoresArray);
         highscoresList.setAdapter(highscoresAdapter);
 
-        // Setando qualquer coisa, e fora de ordem. Com isso testo sort e a exibição.
-        /*highscoresArray.add(0, "15");
-        highscoresArray.add(0, "37");
-        highscoresArray.add(0, "22");
-        highscoresArray.add(0, "142");
-        highscoresArray.add(0, "88");*/
         setScoresFromFile();
         highscoresAdapter.notifyDataSetChanged();
 

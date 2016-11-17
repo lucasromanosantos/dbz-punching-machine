@@ -83,10 +83,6 @@ public class PunchActivity extends AppCompatActivity  {
             @Override
             public void onSensorChanged(SensorEvent event) {
                 float NOISE = 0.2f;
-                TextView tvX = (TextView) findViewById(R.id.x_axis);
-                TextView tvY = (TextView) findViewById(R.id.y_axis);
-                TextView tvZ = (TextView) findViewById(R.id.z_axis);
-                //ImageView iv = (ImageView) findViewById(R.id.image);
                 float x = event.values[0]; // X
                 float y = event.values[1]; // Y
                 float z = event.values[2]; // Z
@@ -94,9 +90,6 @@ public class PunchActivity extends AppCompatActivity  {
                     mLastX = x;
                     mLastY = y;
                     mLastZ = z;
-                    tvX.setText("0.0");
-                    tvY.setText("0.0");
-                    tvZ.setText("0.0");
                     mInitialized = true;
                 } else {
                     float deltaX = Math.abs(mLastX - x);
@@ -108,9 +101,6 @@ public class PunchActivity extends AppCompatActivity  {
                     mLastX = x;
                     mLastY = y;
                     mLastZ = z;
-                    tvX.setText(Float.toString(deltaX));
-                    tvY.setText(Float.toString(deltaY));
-                    tvZ.setText(Float.toString(deltaZ));
                     results.add(getNorm(deltaX, deltaY, deltaZ));
                 }
             }
