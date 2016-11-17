@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -171,7 +172,7 @@ public class PunchActivity extends AppCompatActivity  {
                 fim = true;
                 countdown.setText("Soque!");
                 resultado = Collections.max(results);
-                //countdown.setText("" + resultado);
+                addScore(resultado.intValue());
                 startCountAnimation();
                 mSensorManager.unregisterListener(myAccelerometerListener);
 
@@ -219,6 +220,18 @@ public class PunchActivity extends AppCompatActivity  {
             }
         });
         animator.start();
+    }
+
+    private void addScore(int saida) {
+        FileOutputStream fout;
+        String output = saida + " ";
+        try {
+            fout = openFileOutput("scores.txt", MODE_APPEND);
+            fout.write(output.getBytes());
+            fout.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void onResume() {

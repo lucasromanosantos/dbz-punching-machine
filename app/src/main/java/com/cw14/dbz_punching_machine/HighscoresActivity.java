@@ -1,5 +1,6 @@
 package com.cw14.dbz_punching_machine;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,11 +38,12 @@ public class HighscoresActivity extends AppCompatActivity {
         highscoresList.setAdapter(highscoresAdapter);
 
         // Setando qualquer coisa, e fora de ordem. Com isso testo sort e a exibição.
-        highscoresArray.add(0, "15");
+        /*highscoresArray.add(0, "15");
         highscoresArray.add(0, "37");
         highscoresArray.add(0, "22");
         highscoresArray.add(0, "142");
-        highscoresArray.add(0, "88");
+        highscoresArray.add(0, "88");*/
+        setScoresFromFile();
         highscoresAdapter.notifyDataSetChanged();
 
         highscoresList.setBackgroundColor(Color.TRANSPARENT);
@@ -58,5 +61,26 @@ public class HighscoresActivity extends AppCompatActivity {
         for(int i=0; i<highscoresArray.size(); i++) {
             highscoresArray.set(i, Integer.toString(i+1) + ". " + highscoresArray.get(i));
         }
+    }
+
+    private void setScoresFromFile() {
+        FileInputStream fin;
+        int c;
+        String string = "";
+        try {
+            fin = openFileInput("scores.txt");
+            while( (c = fin.read()) != -1) {
+                string = string + Character.toString((char) c);
+            }
+            string = string.trim();
+            String tok[] = string.split(" ");
+            for(String s:tok) {
+                highscoresArray.add(0, s);
+            }
+            fin.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
