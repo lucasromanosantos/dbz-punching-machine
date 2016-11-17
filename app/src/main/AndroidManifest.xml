@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PunchActivity"> </activity>
+        <activity android:name=".HighscoresActivity"> </activity>
         <activity android:name=".InstructionsActivity"> </activity>
         <activity android:name=".GraphActivity"> </activity>
     </application>

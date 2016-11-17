@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button beginButton, instructionsButton, exitButton;
+    private Button beginButton, instructionsButton, exitButton, highscoresButton;
 
     // Accelerator stuff.
     @Override
@@ -16,9 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        beginButton = (Button) findViewById(R.id.beginButton) ;
-        instructionsButton = (Button) findViewById(R.id.instructionsButton) ;
-        exitButton = (Button) findViewById(R.id.exitButton) ;
+        exitButton = (Button) findViewById(R.id.exitButton);
+        beginButton = (Button) findViewById(R.id.beginButton);
+        highscoresButton = (Button) findViewById(R.id.highscoresButton);
+        instructionsButton = (Button) findViewById(R.id.instructionsButton);
 
         beginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        highscoresButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, HighscoresActivity.class);
+                    startActivity(intent);
+                }
+            }
+        );
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

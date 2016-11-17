@@ -142,6 +142,7 @@ public class PunchActivity extends AppCompatActivity  {
         repetirBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                results.clear();
                 resultado = 0d;
                 mSensorManager.registerListener(myAccelerometerListener, mAccelerometer,
                         SensorManager.SENSOR_DELAY_NORMAL);

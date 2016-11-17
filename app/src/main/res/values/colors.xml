@@ -6,4 +6,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="begin">#FF2021</color>
+    <color name="highscoresTitle">#121212</color>
 </resources>

@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Dbz-punching-machine</string>
     <string name="begin">PUNCH!!</string>
-    <string name="instructions">instruções</string>
-    <string name="exit">sair</string>
-    <string name="voltar"> voltar </string>
+    <string name="instructions">Instruções</string>
+    <string name="exit">Sair</string>
+    <string name="voltar">Voltar</string>
+    <string name="highscores">Pontuações</string>
+    <string name="highscoresTitle">Melhores Pontuações:</string>
 </resources>
