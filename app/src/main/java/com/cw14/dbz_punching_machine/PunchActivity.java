@@ -78,7 +78,6 @@ public class PunchActivity extends AppCompatActivity  {
         repetirBt = (Button) findViewById(R.id.repetirBt);
         exibirGraficoBt = (Button) findViewById(R.id.showGraphFadeBt);
         voltarBt = (Button) findViewById(R.id.voltarBt);
-        //goku = (ImageView) findViewById(R.id.majinboo);
 
         myAccelerometerListener = new SensorEventListener() {
             @Override
@@ -140,6 +139,7 @@ public class PunchActivity extends AppCompatActivity  {
                         SensorManager.SENSOR_DELAY_NORMAL);
                 startFirstCountDown();
                 afterPunchPanelFadeOut();
+                afterPunchPanel.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -182,13 +182,9 @@ public class PunchActivity extends AppCompatActivity  {
         AnimationSet animation = new AnimationSet(false);
         animation.addAnimation(fadeIn);
         afterPunchPanel.setVisibility(View.VISIBLE);
-        //afterPunchPanel.setAnimation(animation);
-        //afterPunchPanel.setAlpha(1);
 
         Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         afterPunchPanel.startAnimation(fadeInAnimation);
-        //goku.startAnimation(fadeInAnimation);
-
     }
 
     private void afterPunchPanelFadeOut() {
@@ -200,7 +196,6 @@ public class PunchActivity extends AppCompatActivity  {
         AnimationSet animation = new AnimationSet(false);
         animation.addAnimation(fadeIn);
         afterPunchPanel.setAnimation(animation);
-        afterPunchPanel.setAlpha(0);
     }
 
     private void startCountAnimation() {
@@ -236,5 +231,4 @@ public class PunchActivity extends AppCompatActivity  {
         super.onPause();
         mSensorManager.unregisterListener(myAccelerometerListener);
     }
-
 }
