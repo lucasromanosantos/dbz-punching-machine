@@ -4,62 +4,37 @@
     android:id="@+id/activity_punch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cw14.dbz_punching_machine.PunchActivity">
+    tools:context="com.cw14.dbz_punching_machine.PunchActivity"
+    android:background="@drawable/punching">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:id="@+id/countdown"
         android:gravity="center"
-        android:layout_centerVertical="true"
         android:text="0"
-        style="@style/countdown" />
-
-    <ImageView
-        android:id="@+id/majinboo"
-        android:layout_width="330px"
-        android:layout_height="449px"
-        android:src="@drawable/majinboo"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:background="@android:color/transparent"/>
-
-    <ImageView
-        android:id="@+id/chatBubble"
-        android:layout_width="430px"
-        android:layout_height="300px"
-        android:src="@drawable/chat_bubble"
-        android:layout_alignTop="@id/majinboo"
-        android:layout_marginLeft="250px"
-        android:layout_marginTop="-300px"
-        android:background="@android:color/transparent"
-        />
-
-    <TextView
-        android:id="@+id/messageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/chatBubble"
-        android:layout_alignTop="@id/chatBubble"
-        android:layout_alignRight="@id/chatBubble"
-        android:layout_alignBottom="@id/chatBubble"
-        android:layout_margin="1dp"
-        android:gravity="center"
-        android:text="vc eh lixo"
-        android:textColor="#000000"
-        android:background="@android:color/transparent"
-        />
+        style="@style/countdown"
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/afterPunchPanel"
+        android:layout_alignEnd="@+id/afterPunchPanel"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="126dp" />
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="1"
         android:id="@+id/afterPunchPanel"
-        android:layout_centerHorizontal="true"
+        style="@style/repeatPanel"
+        android:background="@color/transparent"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        style="@style/repeatPanel">
-        <TableRow>
+        android:layout_centerHorizontal="true">
+        <TableRow
+            android:background="@color/transparent"
+            android:backgroundTint="@color/transparent">
             <Button
                 android:layout_span="2"
                 android:id="@+id/repetirBt"
@@ -67,7 +42,9 @@
                 android:layout_height="wrap_content"
                 android:text="Repetir" />
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:background="@color/transparent"
+            android:backgroundTint="@color/transparent">
             <Button
                 android:id="@+id/showGraphFadeBt"
                 android:layout_width="fill_parent"

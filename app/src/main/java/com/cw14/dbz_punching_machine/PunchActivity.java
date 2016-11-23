@@ -74,10 +74,11 @@ public class PunchActivity extends AppCompatActivity  {
                 SensorManager.SENSOR_DELAY_NORMAL);
 
         afterPunchPanel = (TableLayout) findViewById(R.id.afterPunchPanel);
+        afterPunchPanel.setVisibility(View.INVISIBLE);
         repetirBt = (Button) findViewById(R.id.repetirBt);
         exibirGraficoBt = (Button) findViewById(R.id.showGraphFadeBt);
         voltarBt = (Button) findViewById(R.id.voltarBt);
-        goku = (ImageView) findViewById(R.id.majinboo);
+        //goku = (ImageView) findViewById(R.id.majinboo);
 
         myAccelerometerListener = new SensorEventListener() {
             @Override
@@ -155,7 +156,7 @@ public class PunchActivity extends AppCompatActivity  {
     private void startFirstCountDown() {
         new CountDownTimer(4000, 1000) {
             public void onTick(long millisUntilFinished) {
-                countdown.setText("" + millisUntilFinished / 1000);
+                countdown.setText("Tempo Restante:" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -180,11 +181,13 @@ public class PunchActivity extends AppCompatActivity  {
 
         AnimationSet animation = new AnimationSet(false);
         animation.addAnimation(fadeIn);
-        afterPunchPanel.setAnimation(animation);
-        afterPunchPanel.setAlpha(1);
+        afterPunchPanel.setVisibility(View.VISIBLE);
+        //afterPunchPanel.setAnimation(animation);
+        //afterPunchPanel.setAlpha(1);
 
         Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
-        goku.startAnimation(fadeInAnimation);
+        afterPunchPanel.startAnimation(fadeInAnimation);
+        //goku.startAnimation(fadeInAnimation);
 
     }
 
@@ -206,7 +209,7 @@ public class PunchActivity extends AppCompatActivity  {
         animator.setDuration(1000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                countdown.setText("" + (int) animation.getAnimatedValue());
+                countdown.setText("Sua força: " + (int) animation.getAnimatedValue());
             }
         });
         animator.start();
