@@ -133,8 +133,4 @@ public class GraphActivity extends AppCompatActivity {
             }
         });
     }
-
-    void addTextView() {
-        System.out.println(123);
-    }
 }

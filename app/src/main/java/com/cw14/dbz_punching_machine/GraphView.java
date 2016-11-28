@@ -22,7 +22,7 @@ import java.util.Arrays;
 public class GraphView extends View {
     Context graphContext;
 
-    Paint paintAxis;
+    Paint paintAxis, paintValues;
     float[] ptsY;
 
     public GraphView(Context context) {
@@ -41,6 +41,11 @@ public class GraphView extends View {
         paintAxis.setColor(Color.BLACK);
         paintAxis.setStrokeWidth(4);
         paintAxis.setStyle(Paint.Style.FILL_AND_STROKE);
+
+        paintValues = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintValues.setColor(Color.BLUE);
+        paintValues.setStrokeWidth(4);
+        paintValues.setStyle(Paint.Style.FILL_AND_STROKE);
 
         this.invalidate();
     }
@@ -95,13 +100,11 @@ public class GraphView extends View {
         for(i=1; i<4; i++) {
             x = marginLeft + (i * xAxisSize / 3);
             canvas.drawLine(x, measuredHeight - marginBottom, x, measuredHeight - marginBottom + scaleLineSize, paintAxis);
-            // We still need to draw the number (exactly i, position (x,y) should be something like: x-20, measuredHeight-marginBottom)
         }
         // Draw scale on y axis
         for(i=0; i<4; i++) {
             y = marginTop + (i * yAxisSize / 4);
             canvas.drawLine(marginLeft - scaleLineSize, y, marginLeft, y, paintAxis);
-            // We still need to draw the number (what is the number?)
         }
 
         for(i=0; i<ptsY.length; i++) {
@@ -131,7 +134,7 @@ public class GraphView extends View {
 
         for(i=0; i+3<pts.length; i += 2) {
             canvas.drawLine(pts[i+0], measuredHeight - pts[i+1] - marginBottom,
-                            pts[i+2], measuredHeight - pts[i+3] - marginBottom, paintAxis);
+                            pts[i+2], measuredHeight - pts[i+3] - marginBottom, paintValues);
         }
     }
 

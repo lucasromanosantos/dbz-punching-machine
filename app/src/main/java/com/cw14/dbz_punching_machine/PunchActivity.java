@@ -156,7 +156,7 @@ public class PunchActivity extends AppCompatActivity  {
     private void startFirstCountDown() {
         new CountDownTimer(4000, 1000) {
             public void onTick(long millisUntilFinished) {
-                countdown.setText("Tempo Restante:" + millisUntilFinished / 1000);
+                countdown.setText("Tempo:" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {

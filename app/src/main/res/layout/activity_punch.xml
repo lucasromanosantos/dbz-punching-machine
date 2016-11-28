@@ -8,7 +8,7 @@
     android:background="@drawable/punching">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="150dp"
         android:id="@+id/countdown"
         android:gravity="center"
@@ -17,10 +17,6 @@
         android:background="@color/transparent"
         android:backgroundTint="@color/transparent"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/afterPunchPanel"
-        android:layout_alignEnd="@+id/afterPunchPanel"
-        android:layout_marginRight="14dp"
-        android:layout_marginEnd="14dp"
         android:layout_marginTop="126dp" />
 
     <TableLayout
